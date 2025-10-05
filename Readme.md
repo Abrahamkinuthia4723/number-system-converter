@@ -11,7 +11,7 @@
 | Name | Registration Number |
 |------|----------------------|
 | Kinuthia Abraham Ngugi | CT101/G/22378/24 |
-|  |
+| Mbau Victor Kagumba    | CT101/G/23670/24
 
 ---
 
