@@ -73,17 +73,36 @@ It demonstrates understanding of **loops, conditionals, string manipulation, and
 
 ## 💻 2. Program Documentation  
 
-### 2.1 Program Description  
-This C program allows a user to input:
-- A number to convert  
-- The base they are converting **from**  
-- The base they are converting **to**  
+### 2.1 Program Overview
+This C program automates number system conversions between:
 
-The program then prints the converted number automatically.
+- **Binary** (base 2)
+- **Octal** (base 8)
+- **Decimal** (base 10)
+- **Hexadecimal** (base 16)
+
+It allows the user to enter:
+
+1. The number to convert
+2. The base of that number
+3. The base to convert it into
+
+The program then automatically performs the conversion and displays the final result.
+
 
 ---
 
-### 2.2 Source Code  
+### 2.2 Features
+
+- Supports four major number systems (2, 8, 10, 16)
+- Handles both uppercase and lowercase hexadecimal inputs
+- Uses modular design through two main functions (toDecimal and fromDecimal)
+- Displays clean and user-friendly output
+-Efficient and accurate conversions
+
+---
+
+### 2.3 Source Code  
 ```c
 #include <stdio.h>
 #include <string.h>
@@ -157,3 +176,24 @@ void fromDecimal(int decimal, int base, char result[]) {
     }
 }
 ```
+### 2.4 Key Functions Explained
+
+#### int toDecimal(char num[], int base)
+Converts a number from any base (2, 8, 10, or 16) into its decimal equivalent.
+
+**How it works**:
+-Iterates through digits from right to left.
+-Multiplies each digit by increasing powers of the base.
+-Adds all the results to form the decimal number.
+
+---
+
+#### void fromDecimal(int decimal, int base, char result[])
+Converts a decimal number into a target base (2, 8, 10, or 16).
+
+**How it works**:
+- Divides the decimal number repeatedly by the target base.
+- Stores the remainders as digits in reverse order.
+- Reverses the result to get the correct representation.
+  
+---
