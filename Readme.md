@@ -1,7 +1,7 @@
 # Number System Conversion Project  
 
-### Course: **SPC 2207 – **  
-### CAT ONE (22/09/2025)  
+### Course: **SPC 2207 – Digital logic**  
+### CAT ONE  
 ### Topic: **Automation of Number System Conversions**
 
 ---
@@ -23,7 +23,7 @@ The goal of this project is to **automate number system conversions** from one b
 ---
 
 ### 1.2 Problem Statement  
-In computer systems, data can be represented in different number systems.  
+In digital systems, data can be represented in different number systems.  
 Manual conversions between bases (for example, binary to decimal) can be slow and error-prone.  
 This project provides an automated way to convert numbers accurately and quickly.
 
