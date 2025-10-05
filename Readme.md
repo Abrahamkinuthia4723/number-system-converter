@@ -182,9 +182,9 @@ void fromDecimal(int decimal, int base, char result[]) {
 Converts a number from any base (2, 8, 10, or 16) into its decimal equivalent.
 
 **How it works**:
--Iterates through digits from right to left.
--Multiplies each digit by increasing powers of the base.
--Adds all the results to form the decimal number.
+- Iterates through digits from right to left.
+- Multiplies each digit by increasing powers of the base.
+- Adds all the results to form the decimal number.
 
 ---
 
