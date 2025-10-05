@@ -71,7 +71,7 @@ It demonstrates understanding of **loops, conditionals, string manipulation, and
 
 ---
 
-## 💻 2. Program Documentation  
+## 2. Program Documentation  
 
 ### 2.1 Program Overview
 This C program automates number system conversions between:
