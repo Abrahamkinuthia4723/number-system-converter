@@ -1,12 +1,14 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
-int toDecimal(char num[], int base);
-void fromDecimal(int decimal, int base, char result[]);
+long long toDecimal(char num[], int base);
+void fromDecimal(long long decimal, int base, char result[]);
 
 int main() {
     char number[100], result[100];
-    int fromBase, toBase, decimal;
+    int fromBase, toBase;
+    long long decimal;
 
     printf("Enter number: ");
     scanf("%s", number);
@@ -21,13 +23,12 @@ int main() {
     fromDecimal(decimal, toBase, result);
 
     printf("\n%s (base %d) = %s (base %d)\n", number, fromBase, result, toBase);
-
     return 0;
 }
 
-int toDecimal(char num[], int base) {
+long long toDecimal(char num[], int base) {
     int len = strlen(num);
-    int result = 0, power = 1;
+    long long result = 0, power = 1;
 
     for (int i = len - 1; i >= 0; i--) {
         int digit;
@@ -38,8 +39,15 @@ int toDecimal(char num[], int base) {
             digit = num[i] - 'A' + 10;
         else if (num[i] >= 'a' && num[i] <= 'f')
             digit = num[i] - 'a' + 10;
-        else
-            digit = 0;
+        else {
+            printf("Error: invalid character '%c'\n", num[i]);
+            exit(1);
+        }
+
+        if (digit >= base) {
+            printf("Error: '%c' is invalid for base %d\n", num[i], base);
+            exit(1);
+        }
 
         result += digit * power;
         power *= base;
@@ -47,7 +55,7 @@ int toDecimal(char num[], int base) {
     return result;
 }
 
-void fromDecimal(int decimal, int base, char result[]) {
+void fromDecimal(long long decimal, int base, char result[]) {
     char digits[] = "0123456789ABCDEF";
     int i = 0;
 
@@ -62,7 +70,6 @@ void fromDecimal(int decimal, int base, char result[]) {
     }
 
     result[i] = '\0';
-
     for (int j = 0; j < i / 2; j++) {
         char temp = result[j];
         result[j] = result[i - j - 1];
