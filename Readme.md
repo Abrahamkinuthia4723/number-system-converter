@@ -15,59 +15,53 @@
 
 ---
 
-## 1. Process Documentation  
+## Project Overview
 
-### 1.1 Project Objective  
-The goal of this project is to **automate number system conversions** from one base to another (Binary, Octal, Decimal, Hexadecimal) using the **C programming language**.
+This project automates **conversion between number systems**:
 
----
+- Binary (Base 2)  
+- Octal (Base 8)  
+- Decimal (Base 10)  
+- Hexadecimal (Base 16)  
 
-### 1.2 Problem Statement  
-In digital systems, data can be represented in different number systems.  
-Manual conversions between bases (for example, binary to decimal) can be slow and error-prone.  
-This project provides an automated way to convert numbers accurately and quickly.
-
----
-
-### 1.3 Design Process  
-1. Identify the bases to support — **2, 8, 10, and 16**.  
-2. Write a C function to convert any base to decimal (`toDecimal`).  
-3. Write another function to convert from decimal to the target base (`fromDecimal`).  
-4. Combine both conversions inside `main()` to automate the process.  
-5. Test the program with different inputs.
+The user inputs a number, specifies its base, and selects a target base. The program converts the input to decimal internally, then converts it to the target base, handling validation and errors automatically.
 
 ---
 
-### 1.4 Tools Used  
+## Process Documentation
+
+### 1.1 Problem Statement
+Manual number system conversions are time-consuming and prone to errors. The goal is to automate conversions with accuracy and efficiency.
+
+### 1.2 Objectives
+- Automate conversions between **binary, octal, decimal, and hexadecimal**.  
+- Validate user input for correctness.  
+
+---
+
+### 1.3 Tools Used  
 - **Language:** C  
-- **Compiler:** Code::Blocks
+- **Compiler:** VS Code, Dev-C++, Code::Blocks 
 - **Version Control:** GitHub (for collaboration)
 
 ---
 
-### 1.5 Testing Process  
-
-| Input Number | From Base | To Base | Expected Output |
-|---------------|------------|---------|-----------------|
-| 1010 | 2 | 10 | 10 |
-| 47 | 10 | 16 | 2F |
-| 77 | 8 | 2 | 111111 |
-| 2F | 16 | 10 | 47 |
-
-All test results matched the expected outputs  
-
----
-
-### 1.6 Challenges Faced  
-- Handling both uppercase and lowercase hexadecimal letters.  
-- Reversing the output string after conversion.  
-- Ensuring correct base validation.  
+### 1.4. Design and Flow
+1. **Input:** Read number, source base, and target base from user.  
+2. **Convert to Decimal (`toDecimal`)**:  
+   - Convert each digit to numeric value.  
+   - Multiply by its positional power of the base.  
+   - Sum all values to get decimal equivalent.  
+3. **Convert from Decimal (`fromDecimal`)**:  
+   - Repeatedly divide decimal by target base.  
+   - Store remainders as digits.  
+   - Reverse digits for correct representation.  
+4. **Output:** Display the result in the target base.
 
 ---
 
-### 1.7 Conclusion  
-The program successfully automates number conversions between **binary, octal, decimal, and hexadecimal** systems.  
-It demonstrates understanding of **loops, conditionals, string manipulation, and arithmetic operations** in C.
+### 1.5 Conclusion  
+The program successfully automates number conversions between **binary, octal, decimal, and hexadecimal** systems.
 
 ---
 
@@ -89,30 +83,29 @@ It allows the user to enter:
 
 The program then automatically performs the conversion and displays the final result.
 
-
 ---
 
 ### 2.2 Features
 
 - Supports four major number systems (2, 8, 10, 16)
 - Handles both uppercase and lowercase hexadecimal inputs
-- Uses modular design through two main functions (toDecimal and fromDecimal)
 - Displays clean and user-friendly output
--Efficient and accurate conversions
+- Efficient and accurate conversions
 
----
+### 2.3 Source Code
 
-### 2.3 Source Code  
 ```c
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
-int toDecimal(char num[], int base);
-void fromDecimal(int decimal, int base, char result[]);
+long long toDecimal(char num[], int base);
+void fromDecimal(long long decimal, int base, char result[]);
 
 int main() {
     char number[100], result[100];
-    int fromBase, toBase, decimal;
+    int fromBase, toBase;
+    long long decimal;
 
     printf("Enter number: ");
     scanf("%s", number);
@@ -127,13 +120,12 @@ int main() {
     fromDecimal(decimal, toBase, result);
 
     printf("\n%s (base %d) = %s (base %d)\n", number, fromBase, result, toBase);
-
     return 0;
 }
 
-int toDecimal(char num[], int base) {
+long long toDecimal(char num[], int base) {
     int len = strlen(num);
-    int result = 0, power = 1;
+    long long result = 0, power = 1;
 
     for (int i = len - 1; i >= 0; i--) {
         int digit;
@@ -144,8 +136,15 @@ int toDecimal(char num[], int base) {
             digit = num[i] - 'A' + 10;
         else if (num[i] >= 'a' && num[i] <= 'f')
             digit = num[i] - 'a' + 10;
-        else
-            digit = 0;
+        else {
+            printf("Error: invalid character '%c'\n", num[i]);
+            exit(1);
+        }
+
+        if (digit >= base) {
+            printf("Error: '%c' is invalid for base %d\n", num[i], base);
+            exit(1);
+        }
 
         result += digit * power;
         power *= base;
@@ -153,7 +152,7 @@ int toDecimal(char num[], int base) {
     return result;
 }
 
-void fromDecimal(int decimal, int base, char result[]) {
+void fromDecimal(long long decimal, int base, char result[]) {
     char digits[] = "0123456789ABCDEF";
     int i = 0;
 
@@ -168,7 +167,6 @@ void fromDecimal(int decimal, int base, char result[]) {
     }
 
     result[i] = '\0';
-
     for (int j = 0; j < i / 2; j++) {
         char temp = result[j];
         result[j] = result[i - j - 1];
@@ -176,24 +174,19 @@ void fromDecimal(int decimal, int base, char result[]) {
     }
 }
 ```
-### 2.4 Key Functions Explained
+---
 
-#### int toDecimal(char num[], int base)
-Converts a number from any base (2, 8, 10, or 16) into its decimal equivalent.
+### 2.4 Function Descriptions.
 
-**How it works**:
-- Iterates through digits from right to left.
-- Multiplies each digit by increasing powers of the base.
-- Adds all the results to form the decimal number.
+| Function        | Purpose                                              |
+| --------------- | ---------------------------------------------------- |
+| `main()`        | Handles input/output and calls conversion functions. |
+| `toDecimal()`   | Converts any base number to decimal.                 |
+| `fromDecimal()` | Converts decimal number to target base.              |
 
 ---
 
-#### void fromDecimal(int decimal, int base, char result[])
-Converts a decimal number into a target base (2, 8, 10, or 16).
 
-**How it works**:
-- Divides the decimal number repeatedly by the target base.
-- Stores the remainders as digits in reverse order.
-- Reverses the result to get the correct representation.
-  
----
+### 2.5 Smple outputs.
+<img width="2560" height="1440" alt="Image" src="https://github.com/user-attachments/assets/378d8472-0541-4564-8ba2-47d8224e6f85" />
+
