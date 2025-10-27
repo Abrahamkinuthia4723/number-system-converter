@@ -190,7 +190,7 @@ void fromDecimal(long long decimal, int base, char result[]) {
 ---
 
 
-### 2.5 Smple outputs.
+### 2.5 Sample outputs.
 <img width="2560" height="1440" alt="Image" src="https://github.com/user-attachments/assets/378d8472-0541-4564-8ba2-47d8224e6f85" />
 
 <img width="2560" height="1440" alt="Image" src="https://github.com/user-attachments/assets/0e1391bb-4295-486c-afcb-291ec3cb3559" />
