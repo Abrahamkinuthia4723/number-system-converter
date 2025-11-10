@@ -1,4 +1,17 @@
 # Number System Converter
+---
+
+## Group Members  
+
+| Name | Registration Number |
+|------|----------------------|
+| Kinuthia Abraham Ngugi   | CT101/G/22378/24 |
+| Mbau Victor Kagumba      | CT101/G/23670/24 | 
+| Lawrence Kigotho Njoroge | CT101/G/21996/24 |
+| Kimani Peter mwangi      | CT101/G/19791/23 |
+| Griffin's Kimotho        | CT101/G/22430/24 |
+
+---
 
 ## Project Overview
 The **Number System Converter** is a React.js web application designed to automate the conversion of numbers between **Binary (Base 2)**, **Octal (Base 8)**, **Decimal (Base 10)**, and **Hexadecimal (Base 16)** systems.  
